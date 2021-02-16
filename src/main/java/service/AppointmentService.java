@@ -12,4 +12,6 @@ public interface AppointmentService {
     Appointment createNewAppointment(Appointment appointment);
 
     List<Appointment> getAllAppointment();
+
+    Boolean deleteAllAppointments();
 }

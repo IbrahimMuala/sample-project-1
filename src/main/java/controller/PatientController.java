@@ -1,4 +1,4 @@
-package controller.rest;
+package controller;
 
 import model.Patient;
 import service.PatientService;
@@ -11,7 +11,6 @@ import javax.ws.rs.core.Response;
 
 @Path("/patient")
 @ApplicationScoped
-
 public class PatientController {
 
     PatientService patientService = new PatientServiceImp();

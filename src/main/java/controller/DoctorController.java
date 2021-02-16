@@ -1,4 +1,4 @@
-package controller.rest;
+package controller;
 
 import model.Doctor;
 import service.DoctorService;
@@ -11,16 +11,15 @@ import javax.ws.rs.core.Response;
 
 @Path("/doctor")
 @ApplicationScoped
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class DoctorController {
 
     DoctorService doctorService = new DoctorServiceImp();
 
     @POST
     @Path("/register")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Doctor createNewDoctor(Doctor doctor) {
-        System.out.println("hello");
        return doctorService.createNewDoctor(doctor);
     }
 

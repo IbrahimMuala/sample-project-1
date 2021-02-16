@@ -53,8 +53,6 @@ public class AppointmentServiceImp implements AppointmentService {
 
             Appointment appointment = new Appointment();
             appointment.setId(currentRecord.getLong("id"));
-//            Key key = new Key("test", "appointment", currentRecord.getLong("id"));
-//            client.delete(null, key);
             appointment.setDoctor(currentRecord.getLong("doctor"));
             appointment.setPatient(currentRecord.getLong("patient"));
             appointment.setFromDate((Date) currentRecord.getValue("fromDate"));
@@ -87,5 +85,21 @@ public class AppointmentServiceImp implements AppointmentService {
         appointments.add(appointment);
         Bin appointmentsWrite = new Bin("appointments", appointments);
         client.put(null, key, appointmentsWrite);
+    }
+
+    @Override public Boolean deleteAllAppointments() {
+        Statement statement = new Statement();
+        statement.setNamespace("test");
+        statement.setSetName("appointment");
+        RecordSet records = client.query(null, statement);
+
+        while(records.next()) {
+            Record currentRecord = records.getRecord();
+            Appointment appointment = new Appointment();
+            appointment.setId(currentRecord.getLong("id"));
+            Key key = new Key("test", "appointment", currentRecord.getLong("id"));
+            client.delete(null, key);
+        }
+        return true;
     }
 }
